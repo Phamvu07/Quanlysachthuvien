@@ -154,7 +154,7 @@ class Sach {
     }
 }
 
-public class Main {
+public class BaiThucHanhT3_4 {
     public static void main(String[] args) {
         Sach sach = new Sach();
         sach.Nhap();
