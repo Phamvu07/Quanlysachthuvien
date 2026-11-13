@@ -4,6 +4,7 @@
  */
 package com.mycompany.baithuchanht7_8;
 
+import java.time.Year;
 import java.util.Scanner;
 
 /**
@@ -11,24 +12,24 @@ import java.util.Scanner;
  * @author PhamVanVu
  */
 public class Sach {
-    protected String maSach;
-    protected String tieuDe;
-    protected String tacGia;
-    protected int namXuatBan;
-    protected int soLuong;
-    protected Scanner sc = new Scanner(System.in);
+    private String maSach;
+    private String tieuDe;
+    private String tacGia;
+    private int namXuatBan;
+    private int soLuong;
+    private Scanner sc = new Scanner(System.in);
     
     public Sach(){
     }
-    
-    public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong){
-        this.maSach=maSach;
-        this.tieuDe=tieuDe;
-        this.tacGia=tacGia;
-        this.namXuatBan=namXuatBan;
-        this.soLuong=soLuong;
-    }
 
+    public Sach(String maSach, String tieuDe, String tacGia, int namXuatBan, int soLuong){
+        this.maSach = maSach;
+        this.tieuDe = tieuDe;
+        this.tacGia = tacGia;
+        this.setNamXuatBan(namXuatBan);
+        this.setSoLuong(soLuong);
+    }
+    
     public void setMaSach(String maSach) {
         this.maSach = maSach;
     }
@@ -42,11 +43,22 @@ public class Sach {
     }
 
     public void setNamXuatBan(int namXuatBan) {
-        this.namXuatBan = namXuatBan;
+        int currentYear = Year.now().getValue();
+        if (namXuatBan > 0 && namXuatBan <= currentYear) {
+            this.namXuatBan = namXuatBan;
+        } else {
+            System.out.println("Nam xuat ban khong hop le! Dat mac dinh la nam hien tai.");
+            this.namXuatBan = currentYear;
+        }
     }
 
     public void setSoLuong(int soLuong) {
-        this.soLuong = soLuong;
+        if (soLuong >= 0) {
+            this.soLuong = soLuong;
+        } else {
+            System.out.println("So luong khong duoc am! Dat mac dinh la 0.");
+            this.soLuong = 0;
+        }
     }
 
     public String getMaSach() {
@@ -68,21 +80,23 @@ public class Sach {
     public int getSoLuong() {
         return soLuong;
     }
-    
+
     public void Nhap(){
         System.out.println("Nhap thong tin sach: ");
         System.out.print("Nhap ma sach: ");
-        this.maSach=this.sc.nextLine();
+        this.maSach = this.sc.nextLine();
         System.out.print("Nhap tieu de: ");
-        this.tieuDe=this.sc.nextLine();
+        this.tieuDe = this.sc.nextLine();
         System.out.print("Nhap tac gia: ");
-        this.tacGia=this.sc.nextLine();
+        this.tacGia = this.sc.nextLine();
         System.out.print("Nhap nam xuat ban: ");
-        this.namXuatBan=Integer.parseInt(this.sc.nextLine());
+        int nxb = Integer.parseInt(this.sc.nextLine());
+        this.setNamXuatBan(nxb);
         System.out.print("Nhap so luong: ");
-        this.soLuong=Integer.parseInt(this.sc.nextLine());
+        int sl = Integer.parseInt(this.sc.nextLine());
+        this.setSoLuong(sl);
     }
-    
+
     public void Xuat() {
         System.out.println("Ma sach: " + maSach);
         System.out.println("Tieu de: " + tieuDe);
